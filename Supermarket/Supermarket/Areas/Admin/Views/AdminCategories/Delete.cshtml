@@ -1,0 +1,55 @@
+﻿@model Supermarket.Models.Category
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminCategories" asp-action="Index">List Categories</a></li>
+                            <li class="active">Delete Category</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Are you sure you want to delete this?</strong>
+        </div>
+        <div class="card-body card-block">
+            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Category Name</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.CategoryName)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Confirm Deletion</label></div>
+                    <div class="col-12 col-md-9">
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="CategoryId" />
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

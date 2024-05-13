@@ -1,0 +1,97 @@
+﻿@model Supermarket.Models.Customer
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminCustomers" asp-action="Index">List Customers</a></li>
+                            <li class="active">Detail Customer</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Customer Detail</strong>
+        </div>
+        <div class="card-body card-block">
+            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Customer Name</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.CustomerName)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Role</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Role.RoleName)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Email)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Phone</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Phone)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Address</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.Raw(Model.Address)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Gender</label></div>
+                    <div class="col-12 col-md-1">
+                        @if (Model.Gender == true)
+                        {
+                            <p class="form-control-static">Male</p>
+                        }
+                        else
+                        {
+                            <p class="form-control-static">Female</p>
+                        }
+
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Status</label></div>
+                    <div class="col-12 col-md-1">
+                        @if (Model.Active == true)
+                        {
+                            <p class="form-control-static">Active</p>
+                        }
+                        else
+                        {
+                            <p class="form-control-static">Block</p>
+                        }
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

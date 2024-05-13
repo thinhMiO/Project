@@ -1,0 +1,64 @@
+﻿@model Supermarket.Models.Feedback
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminCategories" asp-action="Index">Feedbacks</a></li>
+                            <li class="active">Detail Feedback</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Detail Feedback</strong>
+        </div>
+        <div class="card-body card-block">
+            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Name</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Name)</p>
+                    </div>
+                </div>
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Email)</p>
+                    </div>
+                </div>
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Subject</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Subject)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Message</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Message)</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

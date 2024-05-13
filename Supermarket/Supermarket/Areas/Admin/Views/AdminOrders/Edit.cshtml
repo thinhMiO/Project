@@ -1,0 +1,112 @@
+﻿@model Supermarket.Models.Order
+
+@{
+    ViewData["Title"] = "Edit Order";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index">List Orders</a></li>
+                            <li class="active">Edit Order</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Edit Oder</strong>
+        </div>
+        <div class="card-body card-block">
+            <form asp-action="Edit" asp-route-id="@Model.OrderId" method="post" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="OrderId" />
+                <input type="hidden" asp-for="CustomerId" />
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Customer Name</label></div>
+                    <div class="col-12 col-md-6"><input type="text" asp-for="CustomerName" class="form-control" readonly></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-6"><input type="text" asp-for="Email" class="form-control" readonly></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Phone</label></div>
+                    <div class="col-12 col-md-6"><input type="text" asp-for="Phone" class="form-control" readonly></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Address</label></div>
+                    <div class="col-12 col-md-6"><input type="text" asp-for="Address" class="form-control" readonly></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Payment Method</label></div>
+                    <div class="col-12 col-md-6"><input type="text" asp-for="PaymentMethod" class="form-control" readonly></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Total Amount($)</label></div>
+                    <div class="col-12 col-md-6"><input type="text" asp-for="TotalAmount" class="form-control" readonly></div>
+                </div> <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Shipping Fee($)</label></div>
+                    <div class="col-12 col-md-6"><input type="text" asp-for="TransportFee" class="form-control" readonly></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Order Date</label></div>
+                    <div class="col-12 col-md-6"><input asp-for="OrderDate" class="form-control" readonly></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Delivery Date</label></div>
+                    <div class="col-12 col-md-6"><input asp-for="DeliveryDate" class="form-control" readonly></div>
+                </div>
+                @if (Model.TransactStatusId == 4 || Model.TransactStatusId == 1)
+                {
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status</label></div>
+                        <div class="col-12 col-md-6">
+                            <select asp-for="TransactStatusId" disabled class="form-control" asp-items="ViewBag.TransactStatusId">
+                            </select>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status</label></div>
+                        <div class="col-12 col-md-6">
+                            <select asp-for="TransactStatusId" class="form-control" asp-items="ViewBag.TransactStatusId">
+                            </select>
+                        </div>
+                    </div>
+                }        
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var select = document.getElementById("TransactStatusId");
+
+        var option = select.options[0]; 
+
+        option.disabled = true;
+        option.style.display = 'none';
+    </script>
+}

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Supermarket.Models.Role>
+
+@{
+    ViewData["Title"] = "Manage Access";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li class="active">Manage Access</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+    <div class="card-header">
+        <strong class="card-title">Manage Access</strong>
+    </div>
+
+    <div class="card-body">
+            <div style="float:right;margin-bottom:10px"><a asp-action="Create" class="btn btn-primary">Add New Role</a> </div>
+            <table style="text-align:center" class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Role Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model != null)
+            {
+                @foreach(var item in Model){
+                    <tr>
+                        <th scope="row">@item.RoleId</th>
+                        <td>@item.RoleName</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.RoleId" class="btn btn-primary">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.RoleId" class="btn btn-info">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.RoleId" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+

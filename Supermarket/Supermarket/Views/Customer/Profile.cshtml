@@ -1,0 +1,161 @@
+﻿@model Supermarket.Models.Customer
+
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+<div class="title">
+    <h1>Profile User</h1>
+</div>
+<div class="ProfileUser">
+    <div style="width:350px;">
+        @if (Model.Image != null && Model.Image.Length > 0)
+        {
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="User Image" style="max-width: 300px; border-radius:50%; margin-left:40px;" />
+        }
+    </div>
+    <div class="contentProfile">
+        <div class="container-1">
+            <div class="profile-info">
+                <h2 class="titleprofile">Welcome @Model.CustomerName</h2>
+                <!-- Display user information -->
+                <p><strong>Email:</strong> <span id="email">@Model.Email</span></p>
+                <p><strong>Phone:</strong> <span id="phone">@Model.Phone</span></p>
+                <p><strong>Name:</strong> <span id="name">@Model.CustomerName</span></p>
+                <p><strong>Address:</strong> <span id="address">@Model.Address</span></p>
+                <!-- Display user image -->
+                <!-- Button to change profile -->
+                <button type="button" class="btn btn-primary" onclick="toggleProfile()">Change Profile</button>
+            </div>
+            <div id="change-profile-form">
+                <!-- Edit profile form -->
+                <form method="post" asp-action="ChangeProfile" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <p><strong>Name:</strong> <input id="CustomerName" name="CustomerName" class="form-control" value="@Model.CustomerName" /></p>
+                    </div>
+                    <div class="form-group">
+                        <p><strong>Email:</strong> <input id="Email" name="Email" class="form-control" value="@Model.Email" /></p>
+                    </div>
+                    <div class="form-group">
+                        <p><strong>Phone:</strong> <input id="Phone" name="Phone" class="form-control" value="@Model.Phone" /></p>
+                    </div>
+                    <div class="form-group">
+                        <p><strong>Address:</strong> <input id="Address" name="Address" class="form-control" value="@Model.Address" /></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="Image">Profile Image:</label>
+                        <input type="file" id="Image" name="Image" accept="image/*" class="form-control-file" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-secondary cancel-btn" onclick="cancelEdit()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script>
+        function toggleProfile() {
+            var editSection = document.getElementById('change-profile-form');
+            var infoSection = document.querySelector('.profile-info');
+
+            // Hiển thị hoặc ẩn phần chỉnh sửa thông tin và phần hiển thị thông tin
+            if (editSection.style.display === 'none' || editSection.style.display === '') {
+                editSection.style.display = 'block';
+                infoSection.style.display = 'none';
+            } else {
+                editSection.style.display = 'none';
+                infoSection.style.display = 'block';
+            }
+        }
+
+        function cancelEdit() {
+            var editSection = document.getElementById('change-profile-form');
+            var infoSection = document.querySelector('.profile-info');
+
+            // Ẩn phần chỉnh sửa và hiển thị phần hiển thị thông tin
+            editSection.style.display = 'none';
+            infoSection.style.display = 'block';
+        }
+    </script>
+}
+@section Styles{
+    <style>
+        /* CSS styles */
+        .title {
+            padding: inherit;
+        }
+
+            .title h1 {
+                font-size: 25px;
+                color: black;
+                position: relative;
+                padding: 15px 0px;
+            }
+
+                .title h1::after {
+                    content: "";
+                    width: 100px;
+                    border: 2px solid rgb(1, 243, 114);
+                    position: absolute;
+                    top: 50px;
+                    left: 0px;
+                }
+
+        .ProfileUser {
+            display: grid;
+            grid-template-columns: 30% 50%;
+            column-gap: 2%;
+        }
+
+            .ProfileUser img {
+                width: 100%;
+            }
+
+        .ProfileUser {
+            padding-left: 15px;
+            margin: 20px 0px;
+        }
+
+        .titleprofile {
+            font-size: 25px;
+            color: black;
+            padding: 15px 0px;
+        }
+
+        .container-1 {
+            height: 420px;
+            margin-left: 40px;
+        }
+
+        .profile-info p {
+            font-size: 27px;
+        }
+
+            .profile-info p strong {
+            }
+
+        .profile-info,
+        #change-profile-form {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-secondary.cancel-btn {
+            margin-right: 10px;
+        }
+
+        #change-profile-form {
+            display: none;
+        }
+    </style>    
+}

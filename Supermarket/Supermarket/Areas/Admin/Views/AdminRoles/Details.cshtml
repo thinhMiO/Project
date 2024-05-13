@@ -1,0 +1,52 @@
+﻿@model Supermarket.Models.Role
+
+@{
+    ViewData["Title"] = "Access information";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminRoles" asp-action="Index">Manage Access</a></li>
+                            <li class="active">Detail Access information</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Access information</strong>
+        </div>
+        <div class="card-body card-block">
+            <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Role Name</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.RoleName)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Description</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Description)</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

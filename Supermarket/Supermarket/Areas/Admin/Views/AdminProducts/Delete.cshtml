@@ -1,0 +1,79 @@
+﻿@model Supermarket.Models.Product
+
+@{
+    var item = Model;
+    ViewData["Title"] = "Delete Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index">List Products</a></li>
+                            <li class="active">Delete Product</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Delete Product </strong>
+        </div>
+        <div class="card-body card-block">
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Product Name</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.ProductName)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Product Image</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static"><img src="@item.Image" style="width:180px" /></p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Category</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@item.Category.CategoryName</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Price</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">$@Html.DisplayFor(model => model.Price)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Quantity</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.DisplayFor(model => model.Quantity)</p>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label class=" form-control-label">Description</label></div>
+                    <div class="col-12 col-md-9">
+                        <p class="form-control-static">@Html.Raw(Model.Description)</p>
+                    </div>
+                </div>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="ProductId" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewData["Title"] = "OrderHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                <span class="breadcrumb-item active">Order History</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="container"><h1>Order History</h1></div>
+
+<div class="containerA">
+    <div class="faq">
+        <div class="question">Pending order</div>
+        @await Component.InvokeAsync("Pending")
+    </div>
+    <div class="faq">
+        <div class="question">Order is in transit</div>
+        @await Component.InvokeAsync("Shipping")
+    </div>
+    <div class="faq">
+        <div class="question">Delivered Orders</div>
+        @await Component.InvokeAsync("Delivered")
+    </div>
+    <div class="faq">
+        <div class="question">Cancelled Orders</div>
+        @await Component.InvokeAsync("Cancelled")
+    </div>
+</div>
+
+
+<style>    .containerA {
+        max-width: 70%;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq {
+        margin-bottom: 20px;
+    }
+
+    .question {
+        cursor: pointer;
+        padding: 15px;
+        background-color: #ddd;
+        border-radius: 5px;
+        font-weight: bold;
+        position: relative;
+    }
+        /* Thêm kiểu cho mũi tên */
+        .question::after {
+            content: "\f107"; /* Unicode của Font Awesome cho mũi tên hướng xuống */
+            font-family: "Font Awesome 6 Free";
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+        }
+
+    .answer {
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        display: none; /* Ẩn câu trả lời ban đầu */
+    }
+        /* Thêm kiểu hiển thị cho câu trả lời */
+        .answer.show {
+            display: block;
+        }
+</style>
+
+
+<script>
+
+
+
+    // JavaScript để xử lý sự kiện khi click vào câu hỏi
+    const questions = document.querySelectorAll('.question');
+
+    questions.forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const isActive = answer.classList.contains('show');
+
+            // Đóng tất cả các câu trả lời
+            document.querySelectorAll('.answer').forEach(ans => {
+                ans.classList.remove('show');
+            });
+
+            // Nếu câu trả lời không được hiển thị, hiển thị nó
+            if (!isActive) {
+                answer.classList.add('show');
+            }
+        });
+    });
+</script>

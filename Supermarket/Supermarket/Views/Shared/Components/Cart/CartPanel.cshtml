@@ -1,0 +1,67 @@
+﻿@model Supermarket.DataModels.CartModel;
+
+<a asp-controller="AddToCart" asp-action="MyOrder" class="btn px-0 ml-3" id="cartIcon">
+    <i class="fas fa-shopping-cart text-primary"></i>
+    <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">@Model.Quantity</span>
+</a>
+@*<div class="cart-popup" id="cartPopup">
+    <!-- Danh sách sản phẩm trong giỏ hàng sẽ được thêm vào đây -->
+    <h3>Thông tin giỏ hàng</h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <strong>@item.</strong> - @item.Quantity x @item.Price
+            </li>
+        }
+    </ul>
+    <p>Tổng tiền: @Model.TotalPrice</p>
+</div>
+<script>
+    var cartIcon = document.getElementById('cartIcon');
+    var cartPopup = document.getElementById('cartPopup');
+
+    // Sự kiện xảy ra khi người dùng di chuột vào biểu tượng giỏ hàng
+    cartIcon.addEventListener('mouseenter', function () {
+        cartPopup.style.display = 'block';
+    });
+
+    // Sự kiện xảy ra khi người dùng di chuột ra khỏi biểu tượng giỏ hàng
+    cartIcon.addEventListener('mouseleave', function () {
+        cartPopup.style.display = 'none';
+    });
+</script>
+<style>
+    /* Style cho biểu tượng giỏ hàng */
+    .cart-icon {
+        position: relative;
+        cursor: pointer;
+    }
+
+    /* Style cho số lượng sản phẩm trong giỏ hàng */
+    .cart-count {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    /* Style cho popup hiển thị danh sách sản phẩm trong giỏ hàng */
+    .cart-popup {
+        display: none;
+        position: absolute;
+        top: calc(100% + 5px); /* Hiển thị popup ở dưới biểu tượng giỏ hàng */
+        right: 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 1000;
+        max-width: 300px;
+        overflow-y: auto;
+    }
+
+</style>*@

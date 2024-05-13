@@ -1,0 +1,155 @@
+﻿@model Supermarket.Models.Product
+
+@{
+    ViewData["Title"] = "Create Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index">List Products</a></li>
+                            <li class="active">Create New Product</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Create New Product </strong>
+        </div>
+        <div class="card-body card-block">
+            <form asp-action="Create" method="post" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Product Name</label></div>
+                    <div class="col-12 col-md-6"><input type="text" asp-for="ProductName" class="form-control"></div>
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Image</label></div>
+                    <div class="col-12 col-md-6">
+                        <input type="text" asp-for="Image" class="form-control">
+                        <div>
+                            <img src="" id="PictureView" width="100" />
+                        </div>
+                        <button type="button" id="btnBrowse">Select Photo</button>
+                    </div>
+                    <div class="col-12 col-md-6"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Quantity</label></div>
+                    <div class="col-12 col-md-6"><input type="number" asp-for="Quantity" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Price($)</label></div>
+                    <div class="col-12 col-md-6"><input type="number" asp-for="Price" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Discount(%)</label></div>
+                    <div class="col-12 col-md-6"><input type="number" asp-for="Discount" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Category</label></div>
+                    <div class="col-12 col-md-6">
+                        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
+                            <option value="0" disabled selected>Category</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3">
+                        <label for="text-input" class=" form-control-label">Description</label>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <textarea class="form-control" name="Description" id="ckedit"></textarea>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Best Seller</label></div>
+                    <div class="col-12 col-md-2">@*<input type="text" asp-for="BestSeller" class="form-control">*@
+                        <select asp-for="BestSeller" class="form-control">
+                            <option value="" disabled selected>Choose</option>
+                            <option value="False">No</option>
+                            <option value="True">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Home Flag</label></div>
+                    <div class="col-12 col-md-2">
+                        @*<input type="text" asp-for="HomeFlag" class="form-control">*@
+                        <select asp-for="HomeFlag" class="form-control">
+                            <option value="" disabled selected>Choose</option>
+                            <option value="False">No</option>
+                            <option value="True">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/theme.css" />
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="~/elfinder/css/elfinder.full.css" />
+    <link rel="stylesheet" href="~/elfinder/css/theme.min.css" />
+    <link rel="stylesheet" href="~/elfinder-material-theme/Material/css/theme-gray.css" />
+}
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script type="text/javascript" src="~/lib/jqueryui/jquery-ui.min.js"></script>
+    <script src="~/elfinder/js/elfinder.min.js"></script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                if ($('#btnBrowse') != undefined) {
+                    $('#btnBrowse').click(function () {
+                        var fm = $('<div id="elfinder" />').dialogelfinder({
+                        url: '/magage-file/connector',
+                        baseUrl: "/elfinder/",
+                            width: 840,
+                            height: 450,
+                            destroyOnClose: true,
+                            title: 'Manage Files',
+                            getFileCallback: function (files, fm) {
+                                $('#Image').val('/' + files[0].path);
+                                $('#PictureView').attr('src', '/' + files[0].path);
+                            },
+                            commandsOptions: {
+                                getfile: {
+                                    multiple: true,
+                                    oncomplete: 'close',
+                                    folders: false
+                                }
+                            }
+                        }).dialogelfinder('instance');
+                    })
+                }
+            });
+    </script>
+    <script>
+        CKEDITOR.replace('ckedit');
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,40 @@
+﻿@model Supermarket.DataModels.LoginVM
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row px-xl-5">
+        <div class="col-lg-10">
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Login</span></h5>
+            <div class="bg-light p-30 mb-5">
+                <form asp-action="Login" asp-route-returnurl="@ViewBag.ReturnUrl">
+                    <div class="text-danger" asp-validation-summary="All"></div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label asp-for="@Model.Email">Email<sup>*</sup></label>
+                            <input asp-for="@Model.Email" class="form-control" type="text" placeholder="example@email.com">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label asp-for="@Model.Password">Password<sup>*</sup></label>
+                            <input asp-for="@Model.Password" class="form-control" placeholder="password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group row" style="align-items:center">
+                            <div class="col-md-8 form-group">
+                                <button class="btn btn-block btn-primary font-weight-bold py-3">Login</button>
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <a class="btn btn-block btn-danger">Forgot password</a>
+                            </div>
+                            <p style="margin-left:30px">Do not have an account? <a asp-controller="Customer" asp-action="Register">Singup</a></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" asp-controller="Home" asp-action="Index"><i class=""></i>Home</a>
+                <span class="breadcrumb-item active">Success</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="payment">
+
+    <h1>Success</h1>
+
+    <p style="font-family:26px ; font-weight:400;">
+        You have successfully paid
+    </p>
+    <a asp-controller="Home" asp-action="Index" class="bbt" type="button">Home page</a></br>
+    <a asp-controller="Customer" asp-action="OrderHistory" class="bbt" type="button">OrderHistory</a>
+</div>
+
+@section Styles{
+    <style>
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: green;
+        }
+
+        .payment {
+            border: 2px solid black;
+            text-align: center;
+            width: 500px;
+            margin: auto;
+            height: 150px;
+        }
+
+        button {
+            font-weight: 500;
+        }
+
+        .bbt:hover {
+            color: black;
+            background :#ffffff;
+        }
+
+
+        .payment p {
+            font-family: 50px;
+            font-weight: 1000px;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+    </style>
+}

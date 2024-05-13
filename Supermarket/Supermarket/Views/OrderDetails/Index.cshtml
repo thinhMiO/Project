@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Supermarket.Models.OrderDetail>
+@{
+    ViewData["Title"] = "Order Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var c = 0;
+    double total = 0;
+    double subtotal = 0;
+}
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="breadcrumb-item text-dark" asp-controller="Customer" asp-action="OrderHistory">Order History</a>
+                <span class="breadcrumb-item active">Order Deatail</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 table-responsive mb-5">
+            <table class="table table-light table-borderless table-hover text-center mb-0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Name Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@{c++;}@c</td>
+                            <td class="align-middle">
+                                <img src="@item.Product.Image" alt="" style="width: 50px;">
+                            </td>
+                            <td class="align-middle">
+                                <a asp-controller="Products" asp-action="details" asp-route-Id="@item.ProductId">@item.Product.ProductName</a>
+                            </td>
+                            <td class="align-middle">@item.Quantity</td>
+                            <td class="align-middle">$@item.Price</td>
+                            <td class="align-middle">@item.Discount%</td>
+                            @if (item.Discount <= 0)
+                            {
+                                subtotal = (double)(item.Quantity * item.Price);
+                                <td class="align-middle">$@String.Format("{0:0.00}", subtotal)</td>
+                                total = total + subtotal;
+                            }
+                            else
+                            {
+                                subtotal = (double)(item.Quantity * item.Price * (1 - item.Discount / 100));
+                                <td class="align-middle">$@String.Format("{0:0.00}", subtotal)</td>
+                                total = total + subtotal;
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-4">
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Summary</span></h5>
+            <div class="bg-light p-30 mb-5">
+                <div class="border-bottom pb-2">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h6>Amount</h6>
+                        <h6>$@total</h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Shipping</h6>
+                        <h6 class="font-weight-medium">$10</h6>
+                    </div>
+                </div>
+                <div class="pt-2">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5>Total</h5>
+                        <h5>$@(total + 10)</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

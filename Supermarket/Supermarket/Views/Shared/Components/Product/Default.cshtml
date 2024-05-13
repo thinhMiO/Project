@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Supermarket.Models.Product>
+
+<div class="row px-xl-5">
+    @foreach(var item in Model)
+    {
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+            <div class="product-item bg-light mb-4">
+                <div class="product-img position-relative overflow-hidden">
+                    <img class="img-fluid w-100" src="@item.Image" alt="">
+                    <div class="product-action">
+                        <a class="btn btn-outline-dark btn-square" asp-action="AddToCart" asp-controller="AddToCart" asp-route-id="@item.ProductId" asp-route-returnUrl="@Url.Action("Index", "Home")"><i class="fa fa-shopping-cart"></i></a>
+                        <a class="btn btn-outline-dark btn-square" asp-controller="Products" asp-action="details" asp-route-Id="@item.ProductId"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+                <div class="text-center py-4">
+                    <a class="h6 text-decoration-none text-truncate" asp-controller="Products" asp-action="details" asp-route-Id="@item.ProductId">@item.ProductName</a>
+                    <div class="d-flex align-items-center justify-content-center mt-2">
+                        @if (item.Discount <= 0)
+                        {
+
+                            <h5>$@String.Format("{0:0.00}", item.Price)</h5>
+                        }
+                        else
+                        {
+                            var pricediscount = item.Price * (1 - (item.Discount / 100));
+                            <h5>$@String.Format("{0:0.00}", item.Price * (1 - (item.Discount / 100)))</h5>
+
+                            <h6 class="text-muted ml-2"><del>$@String.Format("{0:0.00}", item.Price)</del></h6>
+                        }
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center mb-1">
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small class="fa fa-star text-primary mr-1"></small>
+                        <small>(99)</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    
+</div>

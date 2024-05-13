@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Supermarket.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Nút "remove" -->
+<div>
+    <button onclick="showConfirmation()">Remove</button>
+    <table>
+        <tr>
+            <td>Id</td>
+        </tr>
+        <tbody>
+            <tr>
+                <td id ="order" data-order-id="30">hA Ha</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Cửa sổ xác nhận ẩn đi ban đầu -->
+<div id="confirmationDialog" class="confirm-dialog">
+    <h2>Xác nhận xóa</h2>
+    <hr />
+    <div class="text-danger">
+        Bạn có chắc chắn muốn xóa không?
+    </div>
+    <button onclick="deleteOrder()">Xác nhận</button>
+    <button onclick="cancelDelete()">Hủy</button>
+</div>
+
+
+
+<script>
+    function showConfirmation() {
+        var confirmationDialog = document.getElementById('confirmationDialog');
+        confirmationDialog.classList.add('show'); // Hiển thị cửa sổ xác nhận
+    }
+
+    function deleteOrder() {
+        //var orderId = /*Lấy ID của đơn hàng cần xóa*/;
+        var orderId = document.getElementById('order').dataset.orderId;
+        // Gửi yêu cầu xóa đến máy chủ bằng AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '/order/' + orderId, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Xóa thành công, có thể chuyển hướng hoặc cập nhật trang tùy theo yêu cầu của bạn
+                    window.location.reload(); // Ví dụ: tải lại trang sau khi xóa thành công
+                } else {
+                    console.error('Đã xảy ra lỗi khi xóa đơn hàng');
+                }
+            }
+        };
+        xhr.send();
+
+        // Ẩn cửa sổ xác nhận sau khi gửi yêu cầu xóa
+        var confirmationDialog = document.getElementById('confirmationDialog');
+        confirmationDialog.classList.remove('show');
+    }
+
+    function cancelDelete() {
+        var confirmationDialog = document.getElementById('confirmationDialog');
+        confirmationDialog.classList.remove('show'); // Ẩn cửa sổ xác nhận
+    }
+</script>
+
+
+<style>
+    .confirm-dialog {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 300px;
+        text-align: center;
+        display: none;
+    }
+
+        .confirm-dialog h2 {
+            margin-top: 0;
+        }
+
+        .confirm-dialog button {
+            margin: 10px;
+        }
+
+        /* Hiển thị cửa sổ khi có lớp 'show' */
+        .confirm-dialog.show {
+            display: block;
+        }
+</style>
+
+

@@ -1,0 +1,54 @@
+﻿@model Supermarket.DataModels.RegisterVM
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row px-xl-5">
+        <div class="col-lg-10">
+            
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Register</span></h5>
+            <p>You have an Account <a asp-controller="Customer" asp-action="Login">Singin</a></p>
+            <div class="bg-light p-30 mb-5">
+                <form asp-action="Register" method="post">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label asp-for="@Model.Email">Email<sup>*</sup></label>
+                            <input asp-for="@Model.Email" class="form-control" type="text" placeholder="example@email.com">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label asp-for="@Model.Password">Password<sup>*</sup></label>
+                            <input asp-for="@Model.Password" class="form-control" placeholder="password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label asp-for="@Model.CustomerName">Name</label>
+                            <input asp-for="@Model.CustomerName" class="form-control" type="text" placeholder="John">
+                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input asp-for="@Model.Gender" class="custom-control-input">
+                                <label class="custom-control-label" for="Gender">Male</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label asp-for="@Model.Phone">Mobile No</label>
+                            <input asp-for="@Model.Phone" class="form-control" type="text" placeholder="0987654321">
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label asp-for="@Model.Address">Address</label>
+                            <input asp-for="@Model.Address" class="form-control" type="text" placeholder="123 Street">
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button class="btn btn-block btn-primary font-weight-bold py-3">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

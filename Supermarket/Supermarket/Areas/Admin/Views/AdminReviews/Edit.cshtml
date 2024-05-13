@@ -1,0 +1,84 @@
+﻿@model Supermarket.Models.Review
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminReviews" asp-action="Index">List Comments</a></li>
+                            <li class="active">Edit Comment</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Edit Access Information</strong>
+        </div>
+        <div class="card-body card-block">
+            <form asp-action="Edit" asp-route-id="@Model.ReviewId" method="post" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ReviewId" />
+                <div class="row form-group">
+                    <div class="col col-md-3"><label asp-for="CustomerId" class="control-label">Customer Name</label></div>
+                    <div class="col-12 col-md-6"><select asp-for="CustomerId"  class="form-control" asp-items="ViewBag.CustomerId"></select></div>
+                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label asp-for="ProductId" class="control-label">Product Name</label></div>
+                    <div class="col-12 col-md-6"><select asp-for="ProductId" re class="form-control" asp-items="ViewBag.ProductId"></select></div>
+                    <span asp-validation-for="ProductId" class="text-danger"></span>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Content</label></div>
+                    <div class="col-12 col-md-6"><input type="text" readonly asp-for="Contents" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Create Date</label></div>
+                    <div class="col-12 col-md-6"><input type="text" readonly asp-for="CreateDate" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status</label></div>
+                    <div class="col-12 col-md-6">
+                        @if (Model.Status == true)
+                        {
+                            <select asp-for="Status" class="form-control">
+                                <option value="False">Block</option>
+                                <option value="True" selected>Active</option>
+                            </select>
+                        }
+                        else
+                        {
+                            <select asp-for="Status" class="form-control">
+                                <option value="False" selected>Block</option>
+                                <option value="True">Active</option>
+                            </select>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

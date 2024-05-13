@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Supermarket.Models.Customer>
+
+@{
+    ViewData["Title"] = "List Customers";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+    <div class="row m-0">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                        <li class="active">List Customers</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title">List Customers</strong>
+        </div>
+
+        <div class="card-body">
+            <table style="text-align:center" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th scope="row">@item.CustomerName</th>
+                                <td>@item.Role.RoleName</td>
+                                <td>@item.Email</td>
+                                <td>@item.Phone</td>
+                                @{
+                                   var gender = (item.Gender == true) ? "Male" : "Female";
+                                   var active = (item.Active == true) ? "Active" : "Block";
+                                }
+                                <td>@gender</td>
+                                <td>@active</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.CustomerId" class="btn btn-primary">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.CustomerId" class="btn btn-info">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

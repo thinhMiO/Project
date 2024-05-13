@@ -1,0 +1,111 @@
+﻿@model Supermarket.Models.Customer
+
+@{
+    ViewData["Title"] = "Edit Customer";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li><a asp-area="Admin" asp-controller="AdminCustomers" asp-action="Index">List Customers</a></li>
+                            <li class="active">Edit Customer</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <strong>Edit Customer: @Model.CustomerName </strong>
+        </div>
+        <div class="card-body card-block">
+            <form asp-action="Edit" asp-route-id="@Model.CustomerId" method="post" class="form-horizontal">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CustomerId" />
+                <input type="hidden" asp-for="Password" />
+                <input type="hidden" asp-for="RandomKey" />
+                <input type="hidden" asp-for="RoleId" />
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Customer Name</label></div>
+                    <div class="col-12 col-md-6"><input type="text" readonly asp-for="CustomerName" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-6"><input type="text" readonly asp-for="Email" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Phone</label></div>
+                    <div class="col-12 col-md-6"><input type="text" readonly asp-for="Phone" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Address</label></div>
+                    <div class="col-12 col-md-6"><input type="text" readonly asp-for="Address" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Create Date</label></div>
+                    <div class="col-12 col-md-6"><input type="text" readonly asp-for="CareateDate" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Last Login</label></div>
+                    <div class="col-12 col-md-6"><input type="text" readonly asp-for="LastLogin" class="form-control"></div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Gender</label></div>
+                    <div class="col-12 col-md-2">
+                        @if (Model.Gender == true)
+                        {
+                            <select asp-for="Gender" class="form-control">
+                                <option value="False">Female</option>
+                                <option value="True" selected>Male</option>
+                            </select>
+                        }
+                        else
+                        {
+                            <select asp-for="Gender" class="form-control">
+                                <option value="False" selected>Female</option>
+                                <option value="True">Male</option>
+                            </select>
+                        }
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status</label></div>
+                    <div class="col-12 col-md-2">
+                        @*<input type="text" asp-for="HomeFlag" class="form-control">*@
+                        @if (Model.Active == true)
+                        {
+                            <select asp-for="Active" class="form-control">
+                                <option value="False">Block</option>
+                                <option value="True" selected>Active</option>
+                            </select>
+                        }
+                        else
+                        {
+                            <select asp-for="Active" class="form-control">
+                                <option value="False" selected>Block</option>
+                                <option value="True">Active</option>
+                            </select>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

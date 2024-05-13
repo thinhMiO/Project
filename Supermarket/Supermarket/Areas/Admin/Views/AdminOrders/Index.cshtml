@@ -1,0 +1,112 @@
+﻿@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@model X.PagedList.IPagedList<Supermarket.Models.Order>;
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a asp-area="Admin" asp-controller="AdminHome" asp-action="Index">Home</a></li>
+                            <li class="active">List Orders</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div>
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">List Orrders</strong>
+            </div>
+            <div class="table-stats order-table ov-h card-body">
+                <form asp-controller="AdminOrders" asp-action="Index" method="get" style="display:flex">
+                    <div>
+                        <select asp-items="ViewBag.TransactStatusId" onchange="this.form.submit()" id="TransactStatusId" name="TransactStatusId" aria-controls="bootstrap-data-table" class="form-control form-control-sm" style="width:180px; margin-bottom:10px">
+                            <option value="0" disabled selected>Status</option>
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+
+                </form>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="serial">#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Order Date</th>
+                            <th>Delivery Date</th>
+                            <th>PayMent</th>
+                            <th>Total Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="serial">@item.OrderId</td>
+                                <td>@item.CustomerName</td>
+                                <td>@item.Email</td>
+                                <td>@item.OrderDate</td>
+                                <td>@item.DeliveryDate</td>
+                                <td>@item.PaymentMethod</td>
+                                <td>$@String.Format("{0:0.00}", item.TotalAmount)</td>
+                                <td>
+                                    @if (item.TransactStatusId == 1)
+                                    {
+                                        <span class="badge badge-pending">Canceled</span>
+                                    }
+                                    else if (item.TransactStatusId == 2)
+                                    {
+                                        <span class="badge badge-yetprocess" style="background:#ebf53c;">Pending</span>
+                                    }
+                                    else if (item.TransactStatusId == 3)
+                                    {
+                                        <span class="badge badge-delivery" style="background:#43edeb;">Delivery</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-complete">Complete</span>
+                                    }
+                                </td>
+                                <td style="display:flex">
+                                    <a asp-action="Edit" asp-route-id="@item.OrderId" class="btn btn-primary" style="height:37px">Edit</a> |
+                                    <form asp-controller="AdminOrderDetails" asp-action="Index" method="get">
+                                        <input id="OrderId" name="OrderId" value="@item.OrderId" type="hidden" />
+                                        <button class="btn btn-info">Details</button>
+                                        @*<a asp-controller="AdminOrderDetails" asp-action="Index" asp-route-id="@item.OrderId" value="@item.OrderId">Details</a>*@
+                                    </form>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div aria-label="Page navigation example">
+                    @Html.PagedListPager(Model, page => Url.Action("Index","AdminOrders" ,
+                    new {page = page}))
+                </div>
+            </div> <!-- /.table-stats -->
+        </div>
+    </div>
+</div>

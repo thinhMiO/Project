@@ -1,0 +1,6 @@
+Account Admin:
+ 	- Email: admin@gmail.com
+	- Password: 1234567890
+Account Paypal:
+	- Email: sb-fzgij30130367@personal.example.com
+	- Password: z^Q-=5#v;

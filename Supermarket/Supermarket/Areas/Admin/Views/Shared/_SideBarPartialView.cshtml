@@ -1,0 +1,46 @@
+﻿<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a asp-area="Admin" asp-controller="AdminHome" asp-action="Index"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Manage Oders</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a asp-area="Admin" asp-controller="AdminOrders" asp-action="Index">List Orders</a></li>
+                       @* <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
+                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>*@
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Manage Category</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-table"></i><a asp-area="Admin" asp-controller="AdminCategories" asp-action="Index">List Categories</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Manage Products</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-th"></i><a asp-area="Admin" asp-controller="AdminProducts" asp-action="Index">List Products</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Manage Customers</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-fort-awesome"></i><a <a asp-area="Admin" asp-controller="AdminCustomers" asp-action="Index">List Customers</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Manage System</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-area-chart"></i><a asp-area="Admin" asp-controller="AdminRoles" asp-action="Index">Manage Access </a></li>
+                        <li><i class="menu-icon fa fa-comments-o"></i><a asp-area="Admin" asp-controller="AdminReviews" asp-action="Index">Comments</a></li>
+                        <li><i class="menu-icon fa fa-pie-chart"></i><a asp-area="Admin" asp-controller="AdminFeedbacks" asp-action="Index">Feedback</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside>
